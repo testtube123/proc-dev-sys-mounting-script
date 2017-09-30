@@ -1,7 +1,7 @@
 #!/bin/bash
 # mount proc,sys and dev with a script.Made to make my life easier
 	echo "Running ....." 
-	if [[ $(findmnt -M "/mnt/gentoo/proc") ]]
+	if [[ $(findmnt -T "/mnt/gentoo/proc") ]]
 then
 	echo " /proc OK"
 else 
@@ -9,7 +9,7 @@ else
 exit 1
 	fi
 
-	if [[ $(findmnt -M "/mnt/gentoo/proc") ]] #Checks to see if Proc can by found
+	if [[ $(findmnt -T "/mnt/gentoo/proc") ]] #Checks to see if Proc can by found
 then
 	echo " /proc OK" # /Proc can be found
 mount -t proc /proc /mnt/gentoo/proc
@@ -18,7 +18,7 @@ else
 exit 1 #exit with error 
 	fi
 
-	if [[ $(findmnt -M	"/mnt/gentoo/sys") ]]
+	if [[ $(findmnt -T	"/mnt/gentoo/sys") ]]
 then
 	echo " /sys OK" #/Sys can be found
 else
@@ -26,7 +26,7 @@ else
 exit 1 #exit with error
 	fi
 
-	if [[	$(findmnt -M "/mnt/gentoo/sys")	]]
+	if [[	$(findmnt -T "/mnt/gentoo/sys")	]]
 then
 	echo "/sys OK" #/sys can be found
 mount --rbind /sys /mnt/gentoo/sys
