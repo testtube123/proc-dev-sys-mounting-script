@@ -15,7 +15,7 @@ echo " /proc OK" # /Proc can be found
 mount -t proc /proc /mnt/gentoo/proc #mounts /proc
 	else 
 echo "Is /proc Mounted?" # /Proc can't be found
-exit 1 #exit with error 
+	exit 1 #exit with error 
 	fi 
 
 	if [[ $(findmnt -T	"/mnt/gentoo/sys") ]]
@@ -23,7 +23,7 @@ exit 1 #exit with error
 echo " /sys OK" #/Sys can be found
 	else
 echo "/sys Fail!" #/Sys can't be found
-exit 1 #exit with error
+	exit 1 #exit with error
 	fi
 
 	if [[	$(findmnt -T "/mnt/gentoo/sys")	]]
@@ -35,7 +35,23 @@ mount --make-rslave /mnt/gentoo/sys
 echo "Is /sys Mounted?" 
 	exit 1
 	fi
+
+	if [[	$(findmnt -T "/mnt/gentoo/dev")	]]
+	then
+echo "/dev OK" #/dev can be found
+	else
+echo "/dev Fail!" #/dev can't be found
+	exit 1 #exit with error
+	fi
+	
+	if	[[ $(findmnt -T "/mnt/gentoo/dev") ]]
+		then
+echo "/dev OK" #/dev can be found		
 mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
+	else
+echo "Is /dev Mounted?"
+	exit 1
+	fi
 echo "Exiting ......"
 	exit 0
